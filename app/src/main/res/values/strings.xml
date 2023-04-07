@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My ApplicationAssignmen</string>
+    <string name="nav_open">Setting</string>
+    <string name="nav_close">News</string>
+    <string name ="My_notification">Coivd Notification</string>
+
+</resources>
