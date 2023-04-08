@@ -131,7 +131,6 @@ public class Login extends AppCompatActivity {
                 String password = null;
                 name=login.getText().toString();
                 password=register.getText().toString();
-                System.out.println(register.getText().toString());
                 URL a = new URL("https://fifnhnbyexnqvygyjzfz.supabase.co/rest/v1/Account?Name=eq." + name);
                 HttpURLConnection hv = (HttpURLConnection) a.openConnection();
                 hv.setRequestProperty("apikey", key);
@@ -144,8 +143,7 @@ public class Login extends AppCompatActivity {
                 i.putExtra("res", result);
                 JSONArray jsonArray = new JSONArray(i.getStringExtra("res"));
                 JSONObject o0 = jsonArray.getJSONObject(0);
-                //result= new String(bInput);
-
+                i.putExtra("name",o0.getString("Name"));
                 if (o0.getString("Name").equals(name)&&o0.getString("Password").equals(password)) {
 
                     startActivity(i);
