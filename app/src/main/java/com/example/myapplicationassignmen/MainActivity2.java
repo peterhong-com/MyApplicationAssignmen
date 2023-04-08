@@ -69,7 +69,10 @@ public class MainActivity2 extends AppCompatActivity {
     Switch notify;
     String LOC;
     String act;
+    String location;
     TextView text;
+    TextView text1;
+    TextView text2;
     NotificationChannel channel;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -79,7 +82,9 @@ public class MainActivity2 extends AppCompatActivity {
         drawerLayout = findViewById(R.id.menu);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
         notify = findViewById(R.id.switch1);
-        text= findViewById(R.id.textView2);
+        text1=findViewById(R.id.textView2);
+        text= findViewById(R.id.textView3);
+        text2=findViewById(R.id.textView4);
         ActivityCompat.requestPermissions(MainActivity2.this,
                 new String[]{ACCESS_FINE_LOCATION}, 1);
         NotificationManager manager =getSystemService(NotificationManager.class);
@@ -195,13 +200,14 @@ public class MainActivity2 extends AppCompatActivity {
                 if (addresses.size() > 0) {
                     System.out.println(addresses.get(0).getLocality());
                     cityName = addresses.get(0).getLocality();
+                    location= addresses.get(0).toString();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
             LOC = cityName;
-            System.out.println(LOC);
-            text.setText(LOC);
+
+
         }
 
         @Override
@@ -258,6 +264,9 @@ public class MainActivity2 extends AppCompatActivity {
                 JSONArray ao  = new JSONArray(i.getStringExtra("res"));
                 JSONObject o0 = ao.getJSONObject(0);
                 act =o0.getString("Covid state");
+                text.setText("Location :"+location);
+                text1.setText(getIntent().getStringExtra("name"));
+                text2.setText("Covid State: "+ act);
                 if (act.equals("Active")) {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity2.this, "0")
